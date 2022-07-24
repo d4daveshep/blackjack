@@ -3,13 +3,16 @@
 
 # Suits = ("Hearts", "Clubs", "Diamonds", "Spades")
 # Names = ("A", "1", "2", "3", "4", "5", "6", "7"}
-from blackjack.card import Card, Suits
+from blackjack.card import Card, Suits, Card_Names
 
 
 class Pack:
     def __init__(self):
-        self.__size = 52
-        self.__cards = [Card(suit) for suit in Suits] * 13
+        self.__cards = []
+        for suit in Suits:
+            for name in Card_Names:
+                self.__cards.append(Card(name, suit))
+        self.__size = len(self.__cards)
 
     @property
     def size(self):
