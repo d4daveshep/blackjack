@@ -17,13 +17,13 @@ def test_should_create_pack_with_default_size(pack):
 
 
 def test_should_get_card_from_pack(pack):
-    card = pack.get_cards(1)[0]
+    card = pack.show_cards(1)[0]
     assert card is not None
     assert isinstance(card, Card)
 
 
 def test_should_get_all_cards_from_pack(pack):
-    cards = pack.get_cards()
+    cards = pack.show_cards()
     assert len(cards) == pack.size
 
 
@@ -43,13 +43,13 @@ def test_card_should_have_valid_name():
         card = Card(name="bogus", suit=Suits.Spades)
     assert error.value.args[0] == "\'bogus\' is not a valid card name"
 
-def test_should_get_full_pack_of_cards(pack):
+def test_should_show_full_pack_of_cards(pack):
 
     # build dictionaries of suits and names found.  value is the count of each
     found_suits = {}
     found_names = {}
 
-    for card in pack.get_cards():
+    for card in pack.show_cards():
         if card.suit not in found_suits:
             found_suits[card.suit] = 1
         else:
@@ -75,6 +75,23 @@ def test_should_get_full_pack_of_cards(pack):
     for name in found_names:
         assert found_names[name] == 4  # should have found 4 of each card name
 
+def test_should_deal_cards_from_pack(pack):
+    assert pack.count_cards_left() == pack.size
 
+    hand = pack.deal_cards(5)
+    assert len(hand) == 5
+
+    assert pack.count_cards_left() == (pack.size - 5)
+
+def test_should_add_card_values(pack):
+
+    hand = pack.deal_cards(5)
+    expected_total = 11+2+3+4+5
+    hand_total = 0
+
+    for card in hand:
+        hand_total += card.value
+
+    assert hand_total == expected_total
 
 
