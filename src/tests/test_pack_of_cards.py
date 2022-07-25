@@ -1,11 +1,12 @@
 # test_pack_of_cards.py
 import sys
+
 import pytest
 
 sys.path.append("../")
 
 from blackjack.pack import Pack
-from blackjack.card import Card, Suits, Card_Names
+from blackjack.card import Card, Suits, CardNames
 
 
 @pytest.fixture()
@@ -28,16 +29,16 @@ def test_should_get_all_cards_from_pack(pack):
 
 
 def test_card_should_have_valid_suit():
-    card = Card(name=Card_Names.Ace, suit=Suits.Spades)
+    card = Card(name=CardNames.Ace, suit=Suits.Spades)
     assert card.suit == Suits.Spades
 
     with pytest.raises(TypeError) as error:
-        card = Card(name=Card_Names.Ace, suit="bogus")
+        card = Card(name=CardNames.Ace, suit="bogus")
     assert error.value.args[0] == "\'bogus\' is not a valid suit"
 
 def test_card_should_have_valid_name():
-    card = Card(name=Card_Names.Ace, suit=Suits.Spades)
-    assert card.name == Card_Names.Ace
+    card = Card(name=CardNames.Ace, suit=Suits.Spades)
+    assert card.name == CardNames.Ace
 
     with pytest.raises(TypeError) as error:
         card = Card(name="bogus", suit=Suits.Spades)
@@ -69,7 +70,7 @@ def test_should_show_full_pack_of_cards(pack):
         assert found_suits[suit] == 13  # should be 14 of each suit
 
     assert len(found_names) == 13  # should have found 13 different card names
-    for name in Card_Names:
+    for name in CardNames:
         assert name in found_names
 
     for name in found_names:

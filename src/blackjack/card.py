@@ -1,7 +1,7 @@
 import enum
 
 
-class Card_Names(enum.Enum):
+class CardNames(enum.Enum):
     Ace = "Ace"
     Two = "2"
     Three = "3"
@@ -25,12 +25,12 @@ class Suits(enum.Enum):
 
 
 class Card:
-    __card_values = {Card_Names.Ace: 11, Card_Names.Two: 2, Card_Names.Three: 3, Card_Names.Four: 4, Card_Names.Five: 5,
-                     Card_Names.Six: 6, Card_Names.Seven: 7, Card_Names.Eight: 8, Card_Names.Nine: 9,
-                     Card_Names.Ten: 10, Card_Names.Jack: 10, Card_Names.Queen: 10, Card_Names.King: 10}
+    __card_values = {CardNames.Ace: 11, CardNames.Two: 2, CardNames.Three: 3, CardNames.Four: 4, CardNames.Five: 5,
+                     CardNames.Six: 6, CardNames.Seven: 7, CardNames.Eight: 8, CardNames.Nine: 9,
+                     CardNames.Ten: 10, CardNames.Jack: 10, CardNames.Queen: 10, CardNames.King: 10}
 
     def __init__(self, name, suit):
-        if isinstance(name, Card_Names):
+        if isinstance(name, CardNames):
             self.__name = name
         else:
             raise TypeError(f"\'{name}\' is not a valid card name")
