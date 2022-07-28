@@ -33,7 +33,7 @@ class Hand():
 
 class Move(enum.Enum):
     Hit = "Hit"
-    Sit = "Sit"
+    Stand = "Stand"
     Bust = "Bust"
 
 class Strategy:
@@ -42,7 +42,7 @@ class Strategy:
         if hand.value < 17:
             return Move.Hit
         elif hand.value <= 21:
-            return Move.Sit
+            return Move.Stand
         else:
             return Move.Bust
 

@@ -68,6 +68,6 @@ def test_hand_should_draw_two_cards_and_decide_next_move(shuffled_pack):
     if hand.value < 17:
         assert move == Move.Hit
     elif hand.value <= 21:
-        assert move == Move.Sit
+        assert move == Move.Stand
     else:
         assert move == Move.Bust
