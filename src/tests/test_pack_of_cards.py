@@ -5,13 +5,10 @@ import pytest
 
 sys.path.append("../")
 
-from blackjack.pack import Pack
 from blackjack.card import Card, Suits, CardNames
+from fixtures import pack, cards
 
 
-@pytest.fixture()
-def pack():
-    return Pack()
 
 def test_should_create_pack_with_default_size(pack):
     assert pack.size == 52
@@ -95,4 +92,10 @@ def test_should_add_card_values(pack):
 
     assert hand_total == expected_total
 
+def test_card_is_ace(cards):
+    assert cards["A"].is_ace()
 
+def test_card_is_not_ace(cards):
+    assert not cards["10"].is_ace()
+    assert not cards["K"].is_ace()
+    assert not cards["6"].is_ace()

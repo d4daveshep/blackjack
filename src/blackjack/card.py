@@ -50,3 +50,7 @@ class Card:
     @property
     def value(self):
         return self.__card_values[self.name]
+
+    def is_ace(self):
+        return self.__name == CardNames.Ace
+

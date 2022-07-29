@@ -5,27 +5,7 @@ sys.path.append("../")
 from blackjack.card import Card, Suits, CardNames
 from blackjack.game import Hand, Strategy, Move
 from blackjack.pack import Pack
-
-
-@pytest.fixture()
-def cards():
-    return {"10": Card(CardNames.Ten, Suits.Spades), "6": Card(CardNames.Six, Suits.Spades),
-            "K": Card(CardNames.King, Suits.Spades), "A": Card(CardNames.Ace, Suits.Spades)}
-
-
-@pytest.fixture()
-def hand_blackjack(cards):
-    return Hand([cards["10"], cards["A"]])
-
-
-@pytest.fixture()
-def hand_K_10(cards):
-    return Hand([cards["K"], cards["10"]])
-
-
-@pytest.fixture()
-def hand_10_6(cards):
-    return Hand([cards["10"], cards["6"]])
+from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6
 
 
 def test_should_count_aces_in_hand(hand_K_10, hand_blackjack):
