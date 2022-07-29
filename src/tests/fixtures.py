@@ -16,7 +16,8 @@ def pack():
 @pytest.fixture()
 def cards():
     return {"10": Card(CardNames.Ten, Suits.Spades), "6": Card(CardNames.Six, Suits.Spades),
-            "K": Card(CardNames.King, Suits.Spades), "A": Card(CardNames.Ace, Suits.Spades)}
+            "K": Card(CardNames.King, Suits.Spades), "A": Card(CardNames.Ace, Suits.Spades),
+            "2_S": Card(CardNames.Two, Suits.Spades)}
 
 
 @pytest.fixture()

@@ -25,16 +25,15 @@ def test_should_get_all_cards_from_pack(pack):
     assert len(cards) == pack.size
 
 
-def test_card_should_have_valid_suit():
-    card = Card(name=CardNames.Ace, suit=Suits.Spades)
-    assert card.suit == Suits.Spades
+def test_card_should_have_valid_suit(cards):
+    assert cards["2_S"].suit == Suits.Spades
 
     with pytest.raises(TypeError) as error:
         card = Card(name=CardNames.Ace, suit="bogus")
     assert error.value.args[0] == "\'bogus\' is not a valid suit"
 
-def test_card_should_have_valid_name():
-    card = Card(name=CardNames.Ace, suit=Suits.Spades)
+def test_card_should_have_valid_name(cards):
+    card = cards["A"]
     assert card.name == CardNames.Ace
 
     with pytest.raises(TypeError) as error:
