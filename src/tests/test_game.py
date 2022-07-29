@@ -8,9 +8,9 @@ from blackjack.pack import Pack
 from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6
 
 
-def test_should_count_aces_in_hand(hand_K_10, hand_blackjack):
-    assert hand_K_10.count_aces() == 0
-    assert hand_blackjack.count_aces() == 1
+def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
+    assert hand_K_10.aces() == []
+    assert len(hand_blackjack.aces()) == 1
 
 
 def test_should_add_values_of_cards_in_hand(hand_K_10, hand_blackjack, hand_10_6):

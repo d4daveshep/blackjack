@@ -10,12 +10,8 @@ class Hand():
     def __len__(self):
         return len(self.__cards)
 
-    def count_aces(self):
-        aces = 0
-        for card in self.__cards:
-            if card.name == CardNames.Ace:
-                aces += 1
-        return aces
+    def aces(self) -> list:
+        return list(filter(lambda card: card.is_ace(), self.__cards))
 
     @property
     def value(self) -> int:
@@ -23,8 +19,8 @@ class Hand():
         for card in self.__cards:
             total += card.value
 
-        if total > 21 and self.count_aces():
-            for i in range(self.count_aces()):
+        if total > 21 and self.aces():
+            for i in self.aces():
                 total -= 10
                 if total <= 21:
                     break
