@@ -1,6 +1,7 @@
 import sys
 
 import pytest
+
 sys.path.append("../")
 
 from blackjack.card import Card, CardNames, Suits
@@ -12,6 +13,7 @@ from blackjack.pack import Pack
 @pytest.fixture()
 def pack():
     return Pack()
+
 
 @pytest.fixture()
 def cards():
@@ -34,3 +36,9 @@ def hand_K_10(cards):
 def hand_10_6(cards):
     return Hand([cards["10"], cards["6"]])
 
+
+@pytest.fixture()
+def shuffled_pack() -> Pack:
+    pack = Pack()
+    pack.shuffle()
+    return pack

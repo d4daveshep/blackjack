@@ -5,7 +5,7 @@ sys.path.append("../")
 from blackjack.card import Card, Suits, CardNames
 from blackjack.game import Hand, Strategy, Move
 from blackjack.pack import Pack
-from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6
+from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6, shuffled_pack
 
 
 def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
@@ -33,11 +33,6 @@ def test_should_add_values_of_cards_in_hand_with_aces(cards):
     assert hand.value == 22
 
 
-@pytest.fixture()
-def shuffled_pack() -> Pack:
-    pack = Pack()
-    pack.shuffle()
-    return pack
 
 
 def test_hand_should_draw_two_cards_and_decide_next_move(shuffled_pack):
