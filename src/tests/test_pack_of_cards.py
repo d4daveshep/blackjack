@@ -26,18 +26,18 @@ def test_should_get_all_cards_from_pack(pack):
 
 
 def test_card_should_have_valid_suit(cards):
-    assert cards["2_S"].suit == Suits.Spades
+    assert cards["Two"].suit == Suits.Hearts
 
     with pytest.raises(TypeError) as error:
         card = Card(name=CardNames.Ace, suit="bogus")
     assert error.value.args[0] == "\'bogus\' is not a valid suit"
 
 def test_card_should_have_valid_name(cards):
-    card = cards["A"]
+    card = cards["Ace"]
     assert card.name == CardNames.Ace
 
     with pytest.raises(TypeError) as error:
-        card = Card(name="bogus", suit=Suits.Spades)
+        card = Card(name="bogus", suit=Suits.Hearts)
     assert error.value.args[0] == "\'bogus\' is not a valid card name"
 
 def test_should_show_full_pack_of_cards(pack):
@@ -80,21 +80,12 @@ def test_should_deal_cards_from_pack(pack):
 
     assert pack.count_cards_left() == (pack.size - 5)
 
-def test_should_add_card_values(pack):
 
-    hand = pack.deal_cards(5)
-    expected_total = 11+2+3+4+5
-    hand_total = 0
-
-    for card in hand:
-        hand_total += card.value
-
-    assert hand_total == expected_total
 
 def test_card_is_ace(cards):
-    assert cards["A"].is_ace()
+    assert cards["Ace"].is_ace()
 
 def test_card_is_not_ace(cards):
-    assert not cards["10"].is_ace()
-    assert not cards["K"].is_ace()
-    assert not cards["6"].is_ace()
+    assert not cards["Ten"].is_ace()
+    assert not cards["King"].is_ace()
+    assert not cards["Six"].is_ace()

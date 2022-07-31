@@ -25,7 +25,7 @@ class Suits(enum.Enum):
 
 
 class Card:
-    __card_values = {CardNames.Ace: 11, CardNames.Two: 2, CardNames.Three: 3, CardNames.Four: 4, CardNames.Five: 5,
+    __card_values = {CardNames.Ace: 1, CardNames.Two: 2, CardNames.Three: 3, CardNames.Four: 4, CardNames.Five: 5,
                      CardNames.Six: 6, CardNames.Seven: 7, CardNames.Eight: 8, CardNames.Nine: 9,
                      CardNames.Ten: 10, CardNames.Jack: 10, CardNames.Queen: 10, CardNames.King: 10}
 
