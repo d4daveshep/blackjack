@@ -1,6 +1,6 @@
 import enum
 
-from blackjack.card import CardNames
+from blackjack.card import CardNames, Card
 
 
 class Hand():
@@ -9,6 +9,10 @@ class Hand():
 
     def __len__(self):
         return len(self.__cards)
+
+    def add(self, card: Card) -> None:
+        assert isinstance(card, Card)
+        self.__cards.append(card)
 
     def aces(self) -> list:
         return list(filter(lambda card: card.is_ace(), self.__cards))
@@ -50,6 +54,11 @@ class Hand():
                 break
         return value
 
+    def soft_value(self) -> int:
+        return self.value
+
+    def max_value(self) -> int:
+        return self.value + len(self.aces()) * 10
 
 class Move(enum.Enum):
     Hit = "Hit"
