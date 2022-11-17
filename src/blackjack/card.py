@@ -1,5 +1,16 @@
 import enum
 
+class Name(enum.Enum):
+    ACE = "Ace"
+    TWO = "Two"
+    THREE = "Three"
+    NINE = "Nine"
+
+class Suit(enum.Enum):
+    HEARTS = "Hearts"
+    DIAMONDS = "Diamonds"
+    CLUBS = "Clubs"
+    SPADES = "Spades"
 
 class CardNames(enum.Enum):
     Ace = "Ace"
