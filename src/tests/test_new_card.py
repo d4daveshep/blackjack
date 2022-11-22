@@ -1,13 +1,15 @@
+import sys
 from typing import NamedTuple
 
 import pytest
+sys.path.append("../")
 
 # from blackjack import card
 # from blackjack.card import CardNames, Suits
 
 
 # Card = namedtuple("Card", "name suit")
-from blackjack.card import Card, Name, Suit
+from src.blackjack.card import Card, Name, Suit
 
 
 def test_cards_are_immutable():

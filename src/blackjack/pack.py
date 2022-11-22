@@ -2,7 +2,7 @@
 
 import random
 
-from blackjack.card import Card, Suit, Name
+from card import Card, Suit, Name
 
 
 class Pack:

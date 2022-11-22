@@ -18,11 +18,13 @@ class Name(enum.Enum):
     QUEEN = "Queen"
     KING = "King"
 
+
 class Suit(enum.Enum):
     HEARTS = "Hearts"
     DIAMONDS = "Diamonds"
     CLUBS = "Clubs"
     SPADES = "Spades"
+
 
 # class CardNames(enum.Enum):
 #     Ace = "Ace"
@@ -47,6 +49,7 @@ class Suit(enum.Enum):
 #     Spades = "Spades"
 
 MyTuple = namedtuple('Card', 'name suit')
+
 
 class Card(NamedTuple):
     name: Name
