@@ -5,7 +5,7 @@ import pytest
 
 sys.path.append("../")
 
-from blackjack.card import Card, Suits, CardNames
+from blackjack.card import Card, Suit, Name
 from fixtures import pack, cards
 
 
@@ -26,31 +26,32 @@ def test_should_get_all_cards_from_pack(pack):
 
 
 def test_card_should_have_valid_suit(cards):
-    assert cards[CardNames.Two].suit == Suits.Hearts
+    assert cards[Name.TWO].suit == Suit.HEARTS
 
-    with pytest.raises(TypeError) as error:
-        card = Card(name=CardNames.Ace, suit="bogus")
+    with pytest.raises(Exception) as error:
+        card = Card(name=Name.ACE, suit="bogus")
+        pass
     assert error.value.args[0] == "\'bogus\' is not a valid suit"
 
 def test_card_should_have_valid_name(cards):
-    card = cards[CardNames.Ace]
-    assert card.name == CardNames.Ace
+    card = cards[Name.Ace]
+    assert card.name == Name.Ace
 
     with pytest.raises(TypeError) as error:
-        card = Card(name="bogus", suit=Suits.Hearts)
+        card = Card(name="bogus", suit=Suit.Hearts)
     assert error.value.args[0] == "\'bogus\' is not a valid card name"
 
 def test_should_show_full_pack_of_cards(pack):
 
-    # build dictionaries of suits and names found.  value is the count of each
-    found_suits = {}
+    # build dictionaries of Suit and names found.  value is the count of each
+    found_Suit = {}
     found_names = {}
 
     for card in pack.show_cards():
-        if card.suit not in found_suits:
-            found_suits[card.suit] = 1
+        if card.suit not in found_Suit:
+            found_Suit[card.suit] = 1
         else:
-            found_suits[card.suit] += 1
+            found_Suit[card.suit] += 1
 
         if card.name not in found_names:
             found_names[card.name] = 1
@@ -58,15 +59,15 @@ def test_should_show_full_pack_of_cards(pack):
             found_names[card.name] += 1
 
     # check the dictionaries contain the expected counted values
-    assert len(found_suits) == 4  # should have found 4 suits
-    for suit in Suits:
-        assert suit in found_suits
+    assert len(found_Suit) == 4  # should have found 4 Suit
+    for suit in Suit:
+        assert suit in found_Suit
 
-    for suit in found_suits:
-        assert found_suits[suit] == 13  # should be 14 of each suit
+    for suit in found_Suit:
+        assert found_Suit[suit] == 13  # should be 14 of each suit
 
     assert len(found_names) == 13  # should have found 13 different card names
-    for name in CardNames:
+    for name in Name:
         assert name in found_names
 
     for name in found_names:
@@ -83,9 +84,9 @@ def test_should_deal_cards_from_pack(pack):
 
 
 def test_card_is_ace(cards):
-    assert cards[CardNames.Ace].is_ace()
+    assert cards[Name.Ace].is_ace()
 
 def test_card_is_not_ace(cards):
-    assert not cards[CardNames.Ten].is_ace()
-    assert not cards[CardNames.King].is_ace()
-    assert not cards[CardNames.Six].is_ace()
+    assert not cards[Name.Ten].is_ace()
+    assert not cards[Name.King].is_ace()
+    assert not cards[Name.Six].is_ace()

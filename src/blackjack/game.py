@@ -1,9 +1,9 @@
 import enum
 
-from blackjack.card import CardNames, Card
+from blackjack.card import Card
 
 
-class Hand():
+class Hand:
     def __init__(self, cards: list):
         self.__cards = cards
 
@@ -48,7 +48,7 @@ class Hand():
 
     def hard_value(self) -> int:
         value = self.value
-        for ace in self.aces():
+        for _ in self.aces():
             value += 10
             if value > 11:
                 break
@@ -59,6 +59,7 @@ class Hand():
 
     def max_value(self) -> int:
         return self.value + len(self.aces()) * 10
+
 
 class Move(enum.Enum):
     Hit = "Hit"

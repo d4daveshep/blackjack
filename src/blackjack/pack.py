@@ -2,14 +2,14 @@
 
 import random
 
-from blackjack.card import Card, Suits, CardNames
+from blackjack.card import Card, Suit, Name
 
 
 class Pack:
     def __init__(self):
         self.__cards = []
-        for suit in Suits:
-            for name in CardNames:
+        for suit in Suit:
+            for name in Name:
                 self.__cards.append(Card(name, suit))
         self.__size = len(self.__cards)
 
@@ -20,7 +20,7 @@ class Pack:
     def show_cards(self, n: int = -1) -> list:
         if n == -1:
             return self.__cards
-        elif 0 < n and n <= self.__size:
+        elif 0 < n <= self.__size:
             return self.__cards[0:n]
         else:
             raise ValueError(f"Can't get {n} cards")
