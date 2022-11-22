@@ -1,4 +1,5 @@
 import enum
+from collections import namedtuple
 from typing import NamedTuple
 
 
@@ -45,10 +46,14 @@ class Suit(enum.Enum):
 #     Diamonds = "Diamonds"
 #     Spades = "Spades"
 
+MyTuple = namedtuple('Card', 'name suit')
 
 class Card(NamedTuple):
     name: Name
     suit: Suit
+
+    def __new__(cls, name, suit):
+        super().__new__(name, suit)
 
 # class Card:
 #     __card_values = {CardNames.Ace: 1, CardNames.Two: 2, CardNames.Three: 3, CardNames.Four: 4, CardNames.Five: 5,
