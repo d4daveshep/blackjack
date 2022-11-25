@@ -26,6 +26,24 @@ class Suit(enum.Enum):
     SPADES = "Spades"
 
 
+class CardFactory:
+    def __init__(self):
+        self.__cards = {}
+
+    def get_card(self, name: Name, suit: Suit):
+        key = (name, suit)
+        card = self.__cards.get(key)
+        if not card:
+            card = self.__Card(name, suit)
+            self.__cards[key] = card
+
+        return card
+
+    class __Card(NamedTuple):
+        name: Name
+        suit: Suit
+
+
 # class CardNames(enum.Enum):
 #     Ace = "Ace"
 #     Two = "2"
@@ -50,13 +68,12 @@ class Suit(enum.Enum):
 
 MyTuple = namedtuple('Card', 'name suit')
 
+# class Card(NamedTuple):
+#     name: Name
+#     suit: Suit
 
-class Card(NamedTuple):
-    name: Name
-    suit: Suit
-
-    def __new__(cls, name, suit):
-        super().__new__(name, suit)
+# def __new__(cls, name, suit):
+#     super().__new__(name, suit)
 
 # class Card:
 #     __card_values = {CardNames.Ace: 1, CardNames.Two: 2, CardNames.Three: 3, CardNames.Four: 4, CardNames.Five: 5,
