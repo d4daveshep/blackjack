@@ -15,9 +15,11 @@ def test_should_create_pack_with_default_size(pack):
 
 
 def test_should_get_card_from_pack(pack):
-    card = pack.show_cards(1)[0]
-    assert card is not None
-    assert isinstance(card, Card)
+    card_list = pack.show_cards(1)
+    card_0 = card_list[0]
+    assert card_0
+    assert card_0.name
+    assert card_0.suit
 
 
 def test_should_get_all_cards_from_pack(pack):

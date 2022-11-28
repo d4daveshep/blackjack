@@ -4,7 +4,7 @@ import pytest
 
 sys.path.append("../")
 
-from blackjack.card import Card, Name, Suit
+from blackjack.card import Name, Suit
 from blackjack.game import Hand
 
 from blackjack.pack import Pack
