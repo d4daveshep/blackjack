@@ -11,5 +11,9 @@ class CardDealer:
     def number_of_cards_left(self):
         return self.__packs * 52
 
+    def deal_cards(self, number_of_cards: int) -> list:
+        return [number_of_cards]
+
+
 
 
