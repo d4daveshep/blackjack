@@ -12,7 +12,7 @@ class CardDealer:
         return self.__packs * 52
 
     def deal_cards(self, number_of_cards: int) -> list:
-        return [number_of_cards]
+        return [i for i in range(number_of_cards)]
 
 
 
