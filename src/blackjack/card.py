@@ -44,6 +44,9 @@ class CardFactory:
         name: Name
         suit: Suit
 
+        def is_ace(self):
+            return self.name == Name.ACE
+
 
 
 

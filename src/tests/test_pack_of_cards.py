@@ -28,18 +28,10 @@ def test_should_get_all_cards_from_pack(pack):
 def test_card_should_have_valid_suit(cards):
     assert cards[Name.TWO].suit == Suit.HEARTS
 
-    with pytest.raises(Exception) as error:
-        card = Card(name=Name.ACE, suit="bogus")
-        pass
-    assert error.value.args[0] == "\'bogus\' is not a valid suit"
 
 def test_card_should_have_valid_name(cards):
-    card = cards[Name.Ace]
-    assert card.name == Name.Ace
-
-    with pytest.raises(TypeError) as error:
-        card = Card(name="bogus", suit=Suit.Hearts)
-    assert error.value.args[0] == "\'bogus\' is not a valid card name"
+    card = cards[Name.ACE]
+    assert card.name == Name.ACE
 
 def test_should_show_full_pack_of_cards(pack):
 
@@ -84,9 +76,9 @@ def test_should_deal_cards_from_pack(pack):
 
 
 def test_card_is_ace(cards):
-    assert cards[Name.Ace].is_ace()
+    assert cards[Name.ACE].is_ace()
 
 def test_card_is_not_ace(cards):
-    assert not cards[Name.Ten].is_ace()
-    assert not cards[Name.King].is_ace()
-    assert not cards[Name.Six].is_ace()
+    assert not cards[Name.TEN].is_ace()
+    assert not cards[Name.KING].is_ace()
+    assert not cards[Name.SIX].is_ace()
