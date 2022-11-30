@@ -1,6 +1,6 @@
 import enum
 
-from blackjack.card import Card
+
 
 
 class Hand:
@@ -10,8 +10,7 @@ class Hand:
     def __len__(self):
         return len(self.__cards)
 
-    def add(self, card: Card) -> None:
-        assert isinstance(card, Card)
+    def add(self, card ) -> None:
         self.__cards.append(card)
 
     def aces(self) -> list:
