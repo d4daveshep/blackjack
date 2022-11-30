@@ -1,12 +1,8 @@
-import sys
 import pytest
 
-sys.path.append("../")
-from blackjack.card import Card, Suits, CardNames
+from blackjack.card import Name
 from blackjack.game import Hand, Strategy, Move
-from blackjack.pack import Pack
-from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6, shuffled_pack, hand_2_2, hand_2_3_4_5_6, hand_A_2, \
-    hand_A_A, hand_K_4_A_J
+from fixtures import hand_K_10, hand_blackjack, cards
 
 
 def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
@@ -15,8 +11,8 @@ def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
 
 
 def test_should_be_blackjack(cards):
-    blackjack_hand_1 = Hand([cards[CardNames.Ace], cards[CardNames.Ten]])
-    blackjack_hand_2 = Hand([cards[CardNames.Ten], cards[CardNames.Ace]])
+    blackjack_hand_1 = Hand([cards[Name.ACE], cards[Name.TEN]])
+    blackjack_hand_2 = Hand([cards[Name.TEN], cards[Name.ACE]])
 
     assert blackjack_hand_1.is_blackjack()
     assert blackjack_hand_2.is_blackjack()
@@ -28,17 +24,17 @@ def test_should_add_values_of_cards_in_hand(hand_K_10, hand_blackjack, hand_10_6
     assert hand_10_6.value == 16
 
 
-def test_should_add_values_of_cards_in_hand_with_aces(cards):
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ace]])  # 2 Aces = 2
+def test_should_add_values_of_cards_in_hand_with_ACEs(cards):
+    hand = Hand([cards[Name.ACE], cards[Name.ACE]])  # 2 ACEs = 2
     assert hand.value == 2
 
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ace], cards[CardNames.Ace]])  # 3 Aces = 3
+    hand = Hand([cards[Name.ACE], cards[Name.ACE], cards[Name.ACE]])  # 3 ACEs = 3
     assert hand.value == 3
 
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ten], cards[CardNames.King]])
+    hand = Hand([cards[Name.ACE], cards[Name.TEN], cards[Name.KING]])
     assert hand.value == 21
 
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ten], cards[CardNames.King], cards[CardNames.Ace]])
+    hand = Hand([cards[Name.ACE], cards[Name.TEN], cards[Name.KING], cards[Name.ACE]])
     assert hand.value == 22
 
 
@@ -82,11 +78,12 @@ def test_hand_values_in_soft_hands(hand_A_2, hand_blackjack, hand_A_A, hand_K_4_
     assert hand_K_4_A_J.max_value() == 35
 
     hand_K_4_A_A_J = hand_K_4_A_J
-    hand_K_4_A_A_J.add(cards[CardNames.Ace])
+    hand_K_4_A_A_J.add(cards[Name.ACE])
     assert hand_K_4_A_A_J.is_soft()
     assert hand_K_4_A_A_J.soft_value() == 26
     assert hand_K_4_A_A_J.hard_value() == 36
     assert hand_K_4_A_A_J.max_value() == 46
+
 
 def test_hand_should_draw_two_cards_and_decide_next_move(shuffled_pack):
     hand = Hand(shuffled_pack.deal_cards(2))
@@ -100,14 +97,12 @@ def test_hand_should_draw_two_cards_and_decide_next_move(shuffled_pack):
     else:
         assert move == Move.Bust
 
+
 def test_should_add_card_to_hand(hand_K_10, cards):
     my_hand = hand_K_10
-    my_hand.add(cards[CardNames.Ace])
+    my_hand.add(cards[Name.ACE])
     assert len(my_hand) == 3
     assert my_hand.soft_value() == 21
 
     with pytest.raises(AssertionError) as error:
         my_hand.add(12)
-
-
-
