@@ -2,15 +2,16 @@
 
 import random
 
-from card import Card, Suit, Name
+from blackjack.card import Suit, Name, CardFactory
 
 
 class Pack:
     def __init__(self):
+        self.__card_factory = CardFactory()
         self.__cards = []
         for suit in Suit:
             for name in Name:
-                self.__cards.append(Card(name, suit))
+                self.__cards.append(self.__card_factory.get_card(name, suit))
         self.__size = len(self.__cards)
 
     @property

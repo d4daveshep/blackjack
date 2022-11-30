@@ -3,8 +3,6 @@ import sys
 
 import pytest
 
-sys.path.append("../")
-
 from blackjack.card import CardFactory, Suit, Name
 from fixtures import pack, cards
 

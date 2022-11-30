@@ -1,18 +1,23 @@
+from blackjack.card import CardFactory
+from blackjack.pack import Pack
+
 
 class CardDealer:
 
     def __init__(self, packs: int = 1):
-        self.__packs = packs
+        self.__number_of_packs = packs
+        self.__pack = Pack()
+
 
     @property
-    def packs(self):
-        return self.__packs
+    def number_of_packs(self):
+        return self.__number_of_packs
 
     def number_of_cards_left(self):
-        return self.__packs * 52
+        return self.__pack.count_cards_left()
 
     def deal_cards(self, number_of_cards: int) -> list:
-        return [i for i in range(number_of_cards)]
+        return self.__pack.deal_cards(number_of_cards)
 
 
 

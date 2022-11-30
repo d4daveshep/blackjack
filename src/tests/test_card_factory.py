@@ -36,3 +36,7 @@ def test_cards_are_singletons():
     nine_hearts_2 = factory.get_card(Name.NINE, Suit.HEARTS)
 
     assert nine_hearts_1 is nine_hearts_2, "Cards are not singletons"
+
+
+
+
