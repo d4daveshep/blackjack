@@ -1,5 +1,4 @@
 import enum
-from collections import namedtuple
 from typing import NamedTuple
 
 
@@ -26,6 +25,11 @@ class Suit(enum.Enum):
     SPADES = "Spades"
 
 
+class Face(enum.Enum):
+    UP = 1
+    DOWN = 2
+
+
 class CardFactory:
     def __init__(self):
         self.__cards = {}
@@ -39,14 +43,9 @@ class CardFactory:
 
         return card
 
-
     class __Card(NamedTuple):
         name: Name
         suit: Suit
 
         def is_ace(self):
             return self.name == Name.ACE
-
-
-
-
