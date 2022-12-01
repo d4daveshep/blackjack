@@ -16,18 +16,21 @@ dealer.receive_card(dealer.deal_card(), Face.DOWN)
 player1.receive_card(dealer.deal_card(), Face.UP)
 dealer.receive_card(dealer.deal_card(), Face.UP)
 
-if player1.has_blackjack() and dealer.has_blackjack():
-    # stand-off, tie
-    # player receives bet back
-
-elif player1.has_blackjack():
-    # player receives 1.5 x bet
-
-elif dealer.has_blackjack():
-    # player loses bet
-
-else:
-
+game.display_hands()
+exit(0)
+#
+# if player1.has_blackjack() and dealer.has_blackjack():
+#     # stand-off, tie
+#     # player receives bet back
+#
+# elif player1.has_blackjack():
+#     # player receives 1.5 x bet
+#
+# elif dealer.has_blackjack():
+#     # player loses bet
+#
+# else:
+#
 
 
 
