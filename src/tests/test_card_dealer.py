@@ -1,15 +1,20 @@
+import pytest
+
 from blackjack.card import Name, Suit
 from blackjack.card_dealer import CardDealer
 
 
-def test_card_dealer_has_pack_of_cards():
-    dealer = CardDealer(packs=1)
-    assert dealer.number_of_packs == 1
-    assert dealer.number_of_cards_left() == 52
+@pytest.fixture(params=[1, 3, 6])
+def dealer(request):
+    return CardDealer(number_of_packs=request.param)
 
 
-def test_card_dealer_can_deal_cards():
-    dealer = CardDealer(packs=1)
+def test_card_dealer_has_pack_of_cards(dealer):
+    assert dealer.number_of_cards_left() == dealer.number_of_packs * 52
+
+
+def test_card_dealer_can_deal_cards(dealer):
+    # dealer = CardDealer(number_of_packs=1)
     hand = dealer.deal_cards(5)
     assert len(hand) == 5
     assert hand[0].name == Name.ACE

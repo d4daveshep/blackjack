@@ -3,7 +3,7 @@ from blackjack.card import Face
 from blackjack.player import Player
 
 game = Blackjack(number_of_packs=6, min_bet=5.00)
-game.use_stacked_deck()  # use a pre-determined order of cards for testing
+game._use_stacked_deck()  # use a pre-determined order of cards for testing
 
 player1 = Player(name="David", inital_balance=100.00)
 game.add_player(player1)
