@@ -1,3 +1,6 @@
+from blackjack.card import CardFactory, Name, Suit
+
+
 class Hand:
     def __init__(self, cards: list):
         self.__cards = cards
@@ -6,6 +9,14 @@ class Hand:
         return len(self.__cards)
 
     def add(self, card) -> None:
+        try:
+            if not isinstance(card.name, Name):
+                raise ValueError("card has no name")
+            if not isinstance(card.suit, Suit):
+                raise ValueError("card has no suit")
+        except AttributeError as err_info:
+            raise ValueError(f"{card} is not a card ")
+
         self.__cards.append(card)
 
     def aces(self) -> list:
