@@ -1,9 +1,10 @@
 from blackjack.card import Face
+from blackjack.hand import Hand
 
 
 class Player:
     def __init__(self, name: str, inital_balance: float):
-        self.hand = None
+        self.hand = Hand()
         self.__balance = inital_balance
         self.__name = name
 
@@ -19,6 +20,4 @@ class Player:
         pass
 
     def receive_card(self, card, facing: Face):
-
         pass
-

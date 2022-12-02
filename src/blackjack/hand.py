@@ -1,9 +1,9 @@
-from blackjack.card import CardFactory, Name, Suit
+from blackjack.card import Name, Suit
 
 
 class Hand:
-    def __init__(self, cards: list):
-        self.__cards = cards
+    def __init__(self):
+        self.__cards = []
 
     def __len__(self):
         return len(self.__cards)
@@ -32,7 +32,7 @@ class Hand:
         """
         Blackjack hands contain 2 cards, an Ace and a 10 or picture card
         """
-        if len(self) == 2 and len(self.aces()) == 1: # and self.hard_value() == 21:
+        if len(self) == 2 and len(self.aces()) == 1:  # and self.hard_value() == 21:
             return True
         else:
             return False

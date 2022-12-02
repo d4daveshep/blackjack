@@ -2,8 +2,17 @@ import pytest
 
 from blackjack.card import Name
 from blackjack.hand import Hand
-from fixtures import hand_K_10, hand_10_6, hand_blackjack, hand_2_2, hand_2_3_4_5_6, hand_A_2, hand_A_A, hand_K_4_A_J, \
-    cards, shuffled_pack
+from fixtures import hand_K_10, hand_10_6, hand_blackjack, hand_2_2, hand_2_3_4_5_6, hand_A_2, hand_A_A, hand_A_A_A, \
+    hand_K_4_A_J, hand_K_10_A, hand_K_10_A_A, cards, shuffled_pack
+
+
+def test_empty_hand():
+    empty = Hand()
+    assert len(empty) == 0
+
+
+def test_hand_length(hand_2_3_4_5_6):
+    assert len(hand_2_3_4_5_6) == 5
 
 
 def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
@@ -12,8 +21,13 @@ def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
 
 
 def test_should_be_blackjack(cards):
-    blackjack_hand_1 = Hand([cards[Name.ACE], cards[Name.TEN]])
-    blackjack_hand_2 = Hand([cards[Name.TEN], cards[Name.ACE]])
+    blackjack_hand_1 = Hand()
+    blackjack_hand_1.add(cards[Name.ACE])
+    blackjack_hand_1.add(cards[Name.TEN])
+
+    blackjack_hand_2 = Hand()
+    blackjack_hand_2.add(cards[Name.TEN])
+    blackjack_hand_2.add(cards[Name.ACE])
 
     assert blackjack_hand_1.is_blackjack()
     assert blackjack_hand_2.is_blackjack()
@@ -25,18 +39,11 @@ def test_should_add_values_of_cards_in_hand(hand_K_10, hand_blackjack, hand_10_6
     assert hand_10_6.value == 16
 
 
-def test_should_add_values_of_cards_in_hand_with_ACEs(cards):
-    hand = Hand([cards[Name.ACE], cards[Name.ACE]])  # 2 ACEs = 2
-    assert hand.value == 2
-
-    hand = Hand([cards[Name.ACE], cards[Name.ACE], cards[Name.ACE]])  # 3 ACEs = 3
-    assert hand.value == 3
-
-    hand = Hand([cards[Name.ACE], cards[Name.TEN], cards[Name.KING]])
-    assert hand.value == 21
-
-    hand = Hand([cards[Name.ACE], cards[Name.TEN], cards[Name.KING], cards[Name.ACE]])
-    assert hand.value == 22
+def test_should_add_values_of_cards_in_hand_with_ACEs(hand_A_A, hand_A_A_A, hand_K_10_A, hand_K_10_A_A):
+    assert hand_A_A.value == 2
+    assert hand_A_A_A.value == 3
+    assert hand_K_10_A.value == 21
+    assert hand_K_10_A_A.value == 22
 
 
 def test_hand_values_in_hard_hands(hand_2_2, hand_10_6, hand_K_10, hand_2_3_4_5_6):

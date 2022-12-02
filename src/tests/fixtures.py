@@ -2,8 +2,6 @@ import sys
 
 import pytest
 
-sys.path.append("../")
-
 from blackjack.card import Name, Suit
 from blackjack.hand import Hand
 
@@ -26,44 +24,100 @@ def cards():
 
 @pytest.fixture()
 def hand_blackjack(cards):
-    return Hand([cards[Name.TEN], cards[Name.ACE]])
+    hand = Hand()
+    hand.add(cards[Name.TEN])
+    hand.add(cards[Name.ACE])
+    return hand
 
 
 @pytest.fixture()
 def hand_K_10(cards):
-    return Hand([cards[Name.KING], cards[Name.TEN]])
+    hand = Hand()
+    hand.add(cards[Name.KING])
+    hand.add(cards[Name.TEN])
+    return hand
+
+
+@pytest.fixture()
+def hand_K_10_A(cards):
+    hand = Hand()
+    hand.add(cards[Name.KING])
+    hand.add(cards[Name.TEN])
+    hand.add(cards[Name.ACE])
+    return hand
+
+
+@pytest.fixture()
+def hand_K_10_A_A(cards):
+    hand = Hand()
+    hand.add(cards[Name.KING])
+    hand.add(cards[Name.TEN])
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.ACE])
+    return hand
 
 
 @pytest.fixture()
 def hand_10_6(cards):
-    return Hand([cards[Name.TEN], cards[Name.SIX]])
+    hand = Hand()
+    hand.add(cards[Name.TEN])
+    hand.add(cards[Name.SIX])
+    return hand
 
 
 @pytest.fixture()
 def hand_2_2(cards):
-    return Hand([cards[Name.TWO], cards[Name.TWO]])
+    hand = Hand()
+    hand.add(cards[Name.TWO])
+    hand.add(cards[Name.TWO])
+    return hand
 
 
 @pytest.fixture()
 def hand_2_3_4_5_6(cards):
-    return Hand([cards[Name.TWO], cards[Name.THREE], cards[Name.FOUR], cards[Name.FIVE],
-                 cards[Name.SIX]])
+    hand = Hand()
+    hand.add(cards[Name.TWO])
+    hand.add(cards[Name.THREE])
+    hand.add(cards[Name.FOUR])
+    hand.add(cards[Name.FIVE])
+    hand.add(cards[Name.SIX])
+    return hand
 
 
 @pytest.fixture()
 def hand_A_2(cards):
-    return Hand([cards[Name.ACE], cards[Name.TWO]])
+    hand = Hand()
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.TWO])
+    return hand
 
 
 @pytest.fixture()
 def hand_A_A(cards):
-    return Hand([cards[Name.ACE], cards[Name.ACE]])
+    hand = Hand()
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.ACE])
+    return hand
+
+
+@pytest.fixture()
+def hand_A_A_A(cards):
+    hand = Hand()
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.ACE])
+    return hand
 
 
 @pytest.fixture()
 def hand_K_4_A_J(cards):
-    return Hand([cards[Name.KING], cards[Name.FOUR], cards[Name.ACE], cards[Name.JACK]])
-    
+    hand = Hand()
+    hand.add(cards[Name.KING])
+    hand.add(cards[Name.FOUR])
+    hand.add(cards[Name.ACE])
+    hand.add(cards[Name.JACK])
+    return hand
+
 
 @pytest.fixture()
 def shuffled_pack() -> Pack:
