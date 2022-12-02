@@ -10,13 +10,9 @@ def game(request):
     return Blackjack(number_of_packs=request.param, min_bet=min_bet)
 
 
-def test_create_blackjack_game():
-    num_packs = 1
-    min_bet = 5.00
-    game = Blackjack(number_of_packs=num_packs, min_bet=min_bet)
+def test_create_blackjack_game(game):
     assert game
-    assert game.number_of_cards_left() == num_packs * 52
-    assert game.min_bet == min_bet
+    assert game.min_bet == 5.0
 
 
 def test_game_has_dealer(game):

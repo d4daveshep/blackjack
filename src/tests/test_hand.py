@@ -1,8 +1,8 @@
 import pytest
 
 from blackjack.card import Name
-from blackjack.game import Hand, Strategy, Move
-from fixtures import hand_K_10, hand_blackjack, cards
+from blackjack.hand import Hand
+from fixtures import hand_K_10, hand_10_6, hand_blackjack, cards
 
 
 def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):

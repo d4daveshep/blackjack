@@ -1,9 +1,11 @@
+from blackjack.card import Face
 from blackjack.pack import Pack
 
 
 class CardDealer:
 
     def __init__(self, number_of_packs: int = 1):
+        self.hand = None
         self.__number_of_packs = number_of_packs
         self.__cards = self.__create_cards(self.__number_of_packs)
         # self.__pack = Pack()
@@ -47,3 +49,6 @@ class CardDealer:
             pack = Pack()
             all_cards += pack.show_cards(-1)
         return all_cards
+
+    def receive_card(self, card, facing: Face):
+        pass

@@ -19,6 +19,9 @@ dealer.receive_card(dealer.deal_card(), Face.DOWN)
 player1.receive_card(dealer.deal_card(), Face.UP)
 dealer.receive_card(dealer.deal_card(), Face.UP)
 
+assert len(player1.hand) == 2
+assert len(dealer.hand) == 2
+
 game.display_hands()
 exit(0)  #  # if player1.has_blackjack() and dealer.has_blackjack():
 #     # stand-off, tie

@@ -82,3 +82,20 @@ def test_card_is_not_ace(cards):
     assert not cards[Name.TEN].is_ace()
     assert not cards[Name.KING].is_ace()
     assert not cards[Name.SIX].is_ace()
+
+def test_card_values(cards):
+    assert cards[Name.ACE].value == 1
+    assert cards[Name.TWO].value == 2
+    assert cards[Name.THREE].value == 3
+    assert cards[Name.FOUR].value == 4
+    assert cards[Name.FIVE].value == 5
+    assert cards[Name.SIX].value == 6
+    assert cards[Name.SEVEN].value == 7
+    assert cards[Name.EIGHT].value == 8
+    assert cards[Name.NINE].value == 9
+    assert cards[Name.TEN].value == 10
+    assert cards[Name.JACK].value == 10
+    assert cards[Name.QUEEN].value == 10
+    assert cards[Name.KING].value == 10
+
+
