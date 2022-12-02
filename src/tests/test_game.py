@@ -1,113 +1,35 @@
-import sys
 import pytest
 
-sys.path.append("../")
-from blackjack.card import Card, Suits, CardNames
-from blackjack.game import Hand, Strategy, Move
-from blackjack.pack import Pack
-from fixtures import hand_K_10, cards, hand_blackjack, hand_10_6, shuffled_pack, hand_2_2, hand_2_3_4_5_6, hand_A_2, \
-    hand_A_A, hand_K_4_A_J
+from blackjack.game import Blackjack
+from blackjack.player import Player
 
 
-def test_should_get_aces_in_hand(hand_K_10, hand_blackjack):
-    assert hand_K_10.aces() == []
-    assert len(hand_blackjack.aces()) == 1
+@pytest.fixture(params=[1, 3, 6])
+def game(request):
+    min_bet = 5.00
+    return Blackjack(number_of_packs=request.param, min_bet=min_bet)
 
 
-def test_should_be_blackjack(cards):
-    blackjack_hand_1 = Hand([cards[CardNames.Ace], cards[CardNames.Ten]])
-    blackjack_hand_2 = Hand([cards[CardNames.Ten], cards[CardNames.Ace]])
-
-    assert blackjack_hand_1.is_blackjack()
-    assert blackjack_hand_2.is_blackjack()
-
-
-def test_should_add_values_of_cards_in_hand(hand_K_10, hand_blackjack, hand_10_6):
-    assert hand_blackjack.hard_value() == 21
-    assert hand_K_10.value == 20
-    assert hand_10_6.value == 16
+def test_create_blackjack_game():
+    num_packs = 1
+    min_bet = 5.00
+    game = Blackjack(number_of_packs=num_packs, min_bet=min_bet)
+    assert game
+    assert game.number_of_cards_left() == num_packs * 52
+    assert game.min_bet == min_bet
 
 
-def test_should_add_values_of_cards_in_hand_with_aces(cards):
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ace]])  # 2 Aces = 2
-    assert hand.value == 2
-
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ace], cards[CardNames.Ace]])  # 3 Aces = 3
-    assert hand.value == 3
-
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ten], cards[CardNames.King]])
-    assert hand.value == 21
-
-    hand = Hand([cards[CardNames.Ace], cards[CardNames.Ten], cards[CardNames.King], cards[CardNames.Ace]])
-    assert hand.value == 22
+def test_game_has_dealer(game):
+    assert game
+    assert game.dealer
 
 
-def test_hand_values_in_hard_hands(hand_2_2, hand_10_6, hand_K_10, hand_2_3_4_5_6):
-    assert hand_2_2.is_hard()
-    assert hand_2_2.hard_value() == 4
-    assert hand_2_2.soft_value() == 4
-
-    assert hand_10_6.is_hard()
-    assert hand_10_6.hard_value() == 16
-    assert hand_10_6.soft_value() == 16
-
-    assert hand_K_10.is_hard()
-    assert hand_K_10.hard_value() == 20
-    assert hand_K_10.soft_value() == 20
-
-    assert hand_2_3_4_5_6.is_hard()
-    assert hand_2_3_4_5_6.hard_value() == (2 + 3 + 4 + 5 + 6)
-    assert hand_2_3_4_5_6.soft_value() == (2 + 3 + 4 + 5 + 6)
+def test_game_dealer_has_correct_number_of_cards(game):
+    assert game.dealer.number_of_cards_left() == game.number_of_packs_in_use * 52
 
 
-def test_hand_values_in_soft_hands(hand_A_2, hand_blackjack, hand_A_A, hand_K_4_A_J, cards):
-    assert hand_A_2.is_soft()
-    assert hand_A_2.hard_value() == 13
-    assert hand_A_2.soft_value() == 3
-    assert hand_A_2.max_value() == 13
-
-    assert hand_blackjack.is_soft()
-    assert hand_blackjack.hard_value() == 21
-    assert hand_blackjack.soft_value() == 11
-    assert hand_blackjack.max_value() == 21
-
-    assert hand_A_A.is_soft()
-    assert hand_A_A.soft_value() == 2
-    assert hand_A_A.hard_value() == 12
-    assert hand_A_A.max_value() == 22
-
-    assert hand_K_4_A_J.is_soft()
-    assert hand_K_4_A_J.soft_value() == 25
-    assert hand_K_4_A_J.hard_value() == 35
-    assert hand_K_4_A_J.max_value() == 35
-
-    hand_K_4_A_A_J = hand_K_4_A_J
-    hand_K_4_A_A_J.add(cards[CardNames.Ace])
-    assert hand_K_4_A_A_J.is_soft()
-    assert hand_K_4_A_A_J.soft_value() == 26
-    assert hand_K_4_A_A_J.hard_value() == 36
-    assert hand_K_4_A_A_J.max_value() == 46
-
-def test_hand_should_draw_two_cards_and_decide_next_move(shuffled_pack):
-    hand = Hand(shuffled_pack.deal_cards(2))
-
-    assert len(hand) == 2
-    move = Strategy.decide_move(hand)
-    if hand.value < 17:
-        assert move == Move.Hit
-    elif hand.value <= 21:
-        assert move == Move.Stand
-    else:
-        assert move == Move.Bust
-
-def test_should_add_card_to_hand(hand_K_10, cards):
-    my_hand = hand_K_10
-    my_hand.add(cards[CardNames.Ace])
-    assert len(my_hand) == 3
-    assert my_hand.soft_value() == 21
-
-    with pytest.raises(AssertionError) as error:
-        my_hand.add(12)
-
-
-
+def test_add_player_to_game(game):
+    assert game
+    player = Player("Test", 100.0)
+    game.add_player(player)
+    assert game.get_player("Test") == player

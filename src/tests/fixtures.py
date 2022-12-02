@@ -4,7 +4,7 @@ import pytest
 
 sys.path.append("../")
 
-from blackjack.card import Card, CardNames, Suits
+from blackjack.card import Name, Suit
 from blackjack.game import Hand
 
 from blackjack.pack import Pack
@@ -26,43 +26,43 @@ def cards():
 
 @pytest.fixture()
 def hand_blackjack(cards):
-    return Hand([cards[CardNames.Ten], cards[CardNames.Ace]])
+    return Hand([cards[Name.TEN], cards[Name.ACE]])
 
 
 @pytest.fixture()
 def hand_K_10(cards):
-    return Hand([cards[CardNames.King], cards[CardNames.Ten]])
+    return Hand([cards[Name.KING], cards[Name.TEN]])
 
 
 @pytest.fixture()
 def hand_10_6(cards):
-    return Hand([cards[CardNames.Ten], cards[CardNames.Six]])
+    return Hand([cards[Name.TEN], cards[Name.SIX]])
 
 
 @pytest.fixture()
 def hand_2_2(cards):
-    return Hand([cards[CardNames.Two], cards[CardNames.Two]])
+    return Hand([cards[Name.TWO], cards[Name.TWO]])
 
 
 @pytest.fixture()
 def hand_2_3_4_5_6(cards):
-    return Hand([cards[CardNames.Two], cards[CardNames.Three], cards[CardNames.Four], cards[CardNames.Five],
-                 cards[CardNames.Six]])
+    return Hand([cards[Name.TWO], cards[Name.THREE], cards[Name.FOUR], cards[Name.FIVE],
+                 cards[Name.SIX]])
 
 
 @pytest.fixture()
 def hand_A_2(cards):
-    return Hand([cards[CardNames.Ace], cards[CardNames.Two]])
+    return Hand([cards[Name.ACE], cards[Name.TWO]])
 
 
 @pytest.fixture()
 def hand_A_A(cards):
-    return Hand([cards[CardNames.Ace], cards[CardNames.Ace]])
+    return Hand([cards[Name.ACE], cards[Name.ACE]])
 
 
 @pytest.fixture()
 def hand_K_4_A_J(cards):
-    return Hand([cards[CardNames.King], cards[CardNames.Four], cards[CardNames.Ace], cards[CardNames.Jack]])
+    return Hand([cards[Name.KING], cards[Name.FOUR], cards[Name.ACE], cards[Name.JACK]])
     
 
 @pytest.fixture()
